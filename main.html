@@ -3,12 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="YieldForge offers institutional-grade DeFi yield optimization with automated strategies, superior security, and maximized returns on stablecoins and crypto assets.">
-    <meta name="keywords" content="DeFi, yield optimization, stablecoins, crypto yields, automated strategies">
-    <title>YieldForge - Institutional-Grade DeFi Yield Optimization</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>NexaFi - Advanced DeFi Protocol</title>
     <style>
         * {
             margin: 0;
@@ -16,102 +11,255 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #FAFBFC;
-            color: #1A1D1F;
-            overflow-x: hidden;
-            line-height: 1.6;
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #131837;
+            --bg-card: #1a1f3a;
+            --accent-primary: #00d4ff;
+            --accent-secondary: #7c3aed;
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
+            --border: rgba(0, 212, 255, 0.1);
+            --success: #10b981;
+            --warning: #f59e0b;
         }
 
+        .light-theme {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --accent-primary: #0ea5e9;
+            --accent-secondary: #8b5cf6;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --border: rgba(14, 165, 233, 0.2);
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
         .navbar {
             position: fixed;
             top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid #E8EBED;
-            z-index: 1000;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .navbar.scrolled {
-            background: rgba(255, 255, 255, 0.96);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.06);
-        }
-
-        .nav-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 1rem 2.5rem;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            padding: 0 2rem;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .logo {
             font-size: 1.5rem;
-            font-weight: 700;
-            color: #0F172A;
-            letter-spacing: -0.02em;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
-            list-style: none;
+            gap: 2rem;
             align-items: center;
         }
 
-        .nav-links a {
+        .nav-link {
+            color: var(--text-secondary);
             text-decoration: none;
-            color: #475569;
             font-weight: 500;
-            font-size: 0.938rem;
-            transition: color 0.2s ease;
-            letter-spacing: -0.01em;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
-        .nav-links a:hover {
-            color: #0F172A;
+        .nav-link:hover {
+            color: var(--accent-primary);
         }
 
-        .connect-wallet {
-            padding: 0.625rem 1.5rem;
-            background: #0F172A;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.875rem;
-            transition: all 0.2s ease;
-            letter-spacing: -0.01em;
-        }
-
-        .connect-wallet:hover {
-            background: #1E293B;
-            transform: translateY(-1px);
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 4px;
-            cursor: pointer;
-        }
-
-        .hamburger span {
-            width: 24px;
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
             height: 2px;
-            background: #0F172A;
-            transition: all 0.3s;
+            background: var(--accent-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            width: 50px;
+            height: 26px;
+            background: var(--bg-card);
+            border-radius: 13px;
+            position: relative;
+            cursor: pointer;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle::before {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .light-theme .theme-toggle::before {
+            transform: translateX(24px);
+        }
+
+        .wallet-btn {
+            padding: 0.7rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .wallet-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 70px;
+            width: 250px;
+            height: calc(100vh - 70px);
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            padding: 2rem 0;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .sidebar.collapsed {
+            width: 80px;
+        }
+
+        .sidebar-toggle {
+            position: absolute;
+            right: -15px;
+            top: 20px;
+            width: 30px;
+            height: 30px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 212, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .sidebar-item {
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .sidebar-item:hover {
+            background: var(--bg-card);
+            color: var(--accent-primary);
+        }
+
+        .sidebar-item.active {
+            background: var(--bg-card);
+            color: var(--accent-primary);
+            border-left: 3px solid var(--accent-primary);
+        }
+
+        .sidebar-icon {
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+        }
+
+        .sidebar.collapsed .sidebar-text {
+            display: none;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            margin-top: 70px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar.collapsed ~ .main-content {
+            margin-left: 80px;
         }
 
         .hero {
-            margin-top: 72px;
-            padding: 8rem 2.5rem 6rem;
-            background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+            padding: 4rem 0;
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
@@ -119,1057 +267,555 @@
         .hero::before {
             content: '';
             position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
-            top: -300px;
-            right: 10%;
-            pointer-events: none;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1), transparent);
+            top: -250px;
+            right: -250px;
+            animation: float 6s ease-in-out infinite;
         }
 
-        .hero-content {
-            max-width: 1280px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: #F1F5F9;
-            border: 1px solid #E2E8F0;
-            border-radius: 100px;
-            font-size: 0.813rem;
-            font-weight: 500;
-            color: #475569;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.01em;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        .hero-badge-dot {
-            width: 6px;
-            height: 6px;
-            background: #10B981;
-            border-radius: 50%;
-            animation: pulse-dot 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-30px, 30px); }
         }
 
         .hero h1 {
-            font-size: 4.5rem;
-            font-weight: 700;
-            color: #0F172A;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.03em;
-            max-width: 900px;
-            animation: fadeIn 0.5s ease-out 0.2s forwards;
-            opacity: 0;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: #64748B;
-            max-width: 680px;
-            margin-bottom: 2.5rem;
-            line-height: 1.7;
-            letter-spacing: -0.01em;
-            animation: fadeIn 0.5s ease-out 0.4s forwards;
-            opacity: 0;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            animation: fadeIn 0.5s ease-out 0.6s forwards;
-            opacity: 0;
-        }
-
-        .btn-primary {
-            padding: 1rem 2rem;
-            background: #0F172A;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            letter-spacing: -0.01em;
-        }
-
-        .btn-primary:hover {
-            background: #1E293B;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
-        }
-
-        .btn-secondary {
-            padding: 1rem 2rem;
-            background: transparent;
-            color: #0F172A;
-            border: 1.5px solid #E2E8F0;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            letter-spacing: -0.01em;
-        }
-
-        .btn-secondary:hover {
-            border-color: #CBD5E1;
-            background: #F8FAFC;
-        }
-
-        .stats {
-            padding: 5rem 2.5rem;
-            background: white;
-            border-top: 1px solid #E8EBED;
-            border-bottom: 1px solid #E8EBED;
-        }
-
-        .stats-grid {
-            max-width: 1280px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 4rem;
-        }
-
-        .stat-item {
-            text-align: left;
-            animation: fadeIn 0.5s ease-out;
-            opacity: 0;
-        }
-
-        .stat-item:nth-child(1) { animation-delay: 0.2s; }
-        .stat-item:nth-child(2) { animation-delay: 0.4s; }
-        .stat-item:nth-child(3) { animation-delay: 0.6s; }
-        .stat-item:nth-child(4) { animation-delay: 0.8s; }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #0F172A;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.02em;
-        }
-
-        .stat-label {
-            font-size: 0.938rem;
-            color: #64748B;
-            font-weight: 500;
-            letter-spacing: -0.01em;
-        }
-
-        .features {
-            padding: 7rem 2.5rem;
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            max-width: 640px;
-            margin-bottom: 4rem;
-            text-align: center;
-        }
-
-        .section-label {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: #3B82F6;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: slideDown 0.6s ease;
         }
 
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #0F172A;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-            line-height: 1.2;
-        }
-
-        .section-description {
-            font-size: 1.125rem;
-            color: #64748B;
-            line-height: 1.7;
-            letter-spacing: -0.01em;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .feature-card {
-            padding: 2.5rem;
-            background: white;
-            border: 1px solid #E8EBED;
-            border-radius: 12px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: cardAppear 0.5s ease-out forwards;
-        }
-
-        .feature-card:nth-child(1) { animation-delay: 0.2s; }
-        .feature-card:nth-child(2) { animation-delay: 0.4s; }
-        .feature-card:nth-child(3) { animation-delay: 0.6s; }
-        .feature-card:nth-child(4) { animation-delay: 0.8s; }
-        .feature-card:nth-child(5) { animation-delay: 1.0s; }
-        .feature-card:nth-child(6) { animation-delay: 1.2s; }
-
-        @keyframes cardAppear {
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            animation: slideUp 0.6s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+            border-color: var(--accent-primary);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-change {
+            font-size: 0.9rem;
+            color: var(--success);
+        }
+
+        .stat-change.negative {
+            color: var(--warning);
+        }
+
+        /* Feature Cards */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1), transparent);
+            top: -50px;
+            right: -50px;
+        }
+
         .feature-card:hover {
-            border-color: #CBD5E1;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-            transform: translateY(-4px);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
+            border-color: var(--accent-primary);
         }
 
         .feature-icon {
-            width: 48px;
-            height: 48px;
-            background: #F1F5F9;
-            border-radius: 10px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 1.5rem;
             font-size: 1.5rem;
-            transition: background 0.3s ease;
-        }
-
-        .feature-card:hover .feature-icon {
-            background: #E0E7FF;
         }
 
         .feature-card h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #0F172A;
-            margin-bottom: 0.75rem;
-            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
         }
 
         .feature-card p {
-            color: #64748B;
-            line-height: 1.7;
-            font-size: 0.938rem;
-            letter-spacing: -0.01em;
+            color: var(--text-secondary);
+            line-height: 1.6;
         }
 
-        .how-it-works {
-            padding: 7rem 2.5rem;
-            background: #F8FAFC;
-        }
-
-        .steps-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-
-        .step {
-            position: relative;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: cardAppear 0.5s ease-out forwards;
-        }
-
-        .step:nth-child(1) { animation-delay: 0.2s; }
-        .step:nth-child(2) { animation-delay: 0.4s; }
-        .step:nth-child(3) { animation-delay: 0.6s; }
-        .step:nth-child(4) { animation-delay: 0.8s; }
-
-        .step-number {
-            width: 40px;
-            height: 40px;
-            background: #0F172A;
-            color: white;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.125rem;
-            margin-bottom: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .step:hover .step-number {
-            transform: scale(1.1);
-        }
-
-        .step h3 {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: #0F172A;
-            margin-bottom: 0.75rem;
-            letter-spacing: -0.01em;
-        }
-
-        .step p {
-            color: #64748B;
-            font-size: 0.938rem;
-            line-height: 1.7;
-            letter-spacing: -0.01em;
-        }
-
-        .vaults-section {
-            padding: 7rem 2.5rem;
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        .vaults-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-top: 3rem;
-        }
-
-        .vault-card {
-            background: white;
-            border: 1px solid #E8EBED;
-            border-radius: 12px;
+        /* Trading Interface */
+        .trading-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 15px;
             padding: 2rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: cardAppear 0.5s ease-out forwards;
+            margin: 3rem 0;
         }
 
-        .vault-card:nth-child(1) { animation-delay: 0.2s; }
-        .vault-card:nth-child(2) { animation-delay: 0.4s; }
-        .vault-card:nth-child(3) { animation-delay: 0.6s; }
-
-        .vault-card:hover {
-            border-color: #CBD5E1;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-            transform: translateY(-4px);
-        }
-
-        .vault-header {
+        .trading-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
             margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid #F1F5F9;
         }
 
-        .vault-title {
+        .token-selector {
             display: flex;
-            align-items: center;
-            gap: 0.75rem;
+            gap: 1rem;
         }
 
-        .vault-icon {
-            width: 40px;
-            height: 40px;
-            background: #F1F5F9;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-            transition: background 0.3s ease;
-        }
-
-        .vault-card:hover .vault-icon {
-            background: #E0E7FF;
-        }
-
-        .vault-name {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: #0F172A;
-            letter-spacing: -0.01em;
-        }
-
-        .vault-apy {
-            text-align: right;
-        }
-
-        .apy-value {
-            font-size: 1.875rem;
-            font-weight: 700;
-            color: #10B981;
-            letter-spacing: -0.02em;
-        }
-
-        .apy-label {
-            font-size: 0.75rem;
-            color: #64748B;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .vault-metrics {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.25rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .metric {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-
-        .metric-label {
-            font-size: 0.813rem;
-            color: #64748B;
-            font-weight: 500;
-        }
-
-        .metric-value {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #0F172A;
-            letter-spacing: -0.01em;
-        }
-
-        .vault-tags {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .tag {
-            padding: 0.375rem 0.75rem;
-            background: #F1F5F9;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #475569;
-            transition: transform 0.2s ease;
-        }
-
-        .vault-card:hover .tag {
-            transform: translateY(-1px);
-        }
-
-        .tag.low-risk {
-            background: #D1FAE5;
-            color: #065F46;
-        }
-
-        .tag.medium-risk {
-            background: #FEF3C7;
-            color: #92400E;
-        }
-
-        .deposit-btn {
-            width: 100%;
-            padding: 0.875rem;
-            background: #0F172A;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.938rem;
+        .token-btn {
+            padding: 0.7rem 1.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
             cursor: pointer;
-            transition: all 0.2s ease;
-            letter-spacing: -0.01em;
+            transition: all 0.3s ease;
         }
 
-        .deposit-btn:hover {
-            background: #1E293B;
-            transform: translateY(-1px);
+        .token-btn:hover {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+            transform: scale(1.05);
         }
 
-        .cta-section {
-            padding: 7rem 2.5rem;
-            background: #0F172A;
-            text-align: center;
+        .token-btn.active {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .input-wrapper {
             position: relative;
-            overflow: hidden;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
-            top: -250px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .cta-content {
-            max-width: 720px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        .cta-section h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-            line-height: 1.2;
-        }
-
-        .cta-section p {
-            font-size: 1.125rem;
-            color: #CBD5E1;
-            margin-bottom: 2.5rem;
-            line-height: 1.7;
-        }
-
-        .cta-section .btn-primary {
-            background: white;
-            color: #0F172A;
-            padding: 1.125rem 2.5rem;
-        }
-
-        .cta-section .btn-primary:hover {
-            background: #F1F5F9;
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
-        }
-
-        footer {
-            background: #FAFBFC;
-            padding: 4rem 2.5rem 2rem;
-            border-top: 1px solid #E8EBED;
-        }
-
-        .footer-content {
-            max-width: 1280px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr repeat(4, 1fr);
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-brand {
-            max-width: 280px;
-        }
-
-        .footer-logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #0F172A;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-        }
-
-        .footer-description {
-            color: #64748B;
-            font-size: 0.938rem;
-            line-height: 1.7;
-            letter-spacing: -0.01em;
-        }
-
-        .footer-section h4 {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: #0F172A;
-            margin-bottom: 1.25rem;
-            letter-spacing: -0.01em;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section li {
-            margin-bottom: 0.75rem;
-        }
-
-        .footer-section a {
-            color: #64748B;
-            text-decoration: none;
-            font-size: 0.938rem;
-            transition: color 0.2s ease;
-            letter-spacing: -0.01em;
-        }
-
-        .footer-section a:hover {
-            color: #0F172A;
-        }
-
-        .footer-bottom {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding-top: 2rem;
-            border-top: 1px solid #E8EBED;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            color: #64748B;
-            font-size: 0.875rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem;
+            transition: all 0.3s ease;
         }
 
-        .footer-links {
+        .input-wrapper:focus-within {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+
+        .input-wrapper input {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            flex: 1;
+            outline: none;
+        }
+
+        .max-btn {
+            padding: 0.4rem 0.8rem;
+            background: var(--accent-secondary);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .max-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .swap-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .swap-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        /* Blockchain Network Indicator */
+        .network-indicator {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 1rem 1.5rem;
             display: flex;
-            gap: 2rem;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
         }
 
-        .footer-links a {
-            color: #64748B;
-            text-decoration: none;
-            transition: color 0.2s ease;
+        .network-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: blink 2s infinite;
         }
 
-        .footer-links a:hover {
-            color: #0F172A;
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.mobile-open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
             .nav-links {
                 display: none;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
-            .nav-links.active {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 72px;
-                left: 0;
-                width: 100%;
-                background: white;
-                padding: 2rem;
-                gap: 1.5rem;
-                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-            }
-
-            .hero h1 {
-                font-size: 3rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 2.5rem;
-            }
-
-            .features-grid,
-            .vaults-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .steps-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 640px) {
-            .hero h1 {
-                font-size: 2.25rem;
-            }
-
-            .hero-cta {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .hero-cta button {
-                width: 100%;
-            }
-
-            .stats-grid,
-            .steps-container,
-            .features-grid,
-            .vaults-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <div class="logo">YieldForge</div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#vaults">Vaults</a></li>
-                <li><a href="#how">How It Works</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#docs">Documentation</a></li>
-            </ul>
-            <button class="connect-wallet" onclick="connectWallet()">Connect Wallet</button>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <div class="logo-icon">⬡</div>
+                NexaFi
+            </div>
+            <div class="nav-links">
+                <a href="#" class="nav-link">Markets</a>
+                <a href="#" class="nav-link">Trade</a>
+                <a href="#" class="nav-link">Pool</a>
+                <a href="#" class="nav-link">Stake</a>
+                <a href="#" class="nav-link">Docs</a>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div class="theme-toggle" onclick="toggleTheme()"></div>
+                <button class="wallet-btn" onclick="connectWallet()">Connect Wallet</button>
             </div>
         </div>
     </nav>
 
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-badge">
-                <span class="hero-badge-dot"></span>
-                Audited & Secure
-            </div>
-            <h1>Institutional-grade yield optimization for everyone</h1>
-            <p>Maximize returns across DeFi protocols with automated strategies. Earn superior yields on stablecoins and crypto assets with institutional-level security.</p>
-            <div class="hero-cta">
-                <button class="btn-primary" onclick="scrollToSection('vaults')">Explore Vaults</button>
-                <button class="btn-secondary" onclick="scrollToSection('how')">How It Works</button>
-            </div>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-toggle" onclick="toggleSidebar()">◀</div>
+        <div class="sidebar-item active">
+            <div class="sidebar-icon">📊</div>
+            <span class="sidebar-text">Dashboard</span>
         </div>
-    </section>
+        <div class="sidebar-item">
+            <div class="sidebar-icon">💱</div>
+            <span class="sidebar-text">Swap</span>
+        </div>
+        <div class="sidebar-item">
+            <div class="sidebar-icon">💧</div>
+            <span class="sidebar-text">Liquidity</span>
+        </div>
+        <div class="sidebar-item">
+            <div class="sidebar-icon">🔒</div>
+            <span class="sidebar-text">Staking</span>
+        </div>
+        <div class="sidebar-item">
+            <div class="sidebar-icon">📈</div>
+            <span class="sidebar-text">Analytics</span>
+        </div>
+        <div class="sidebar-item">
+            <div class="sidebar-icon">⚙️</div>
+            <span class="sidebar-text">Settings</span>
+        </div>
+    </aside>
 
-    <section class="stats">
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>The Future of Decentralized Finance</h1>
+            <p>Trade, earn, and build on the most advanced DeFi protocol</p>
+        </section>
+
+        <!-- Stats Grid -->
         <div class="stats-grid">
-            <div class="stat-item">
-                <div class="stat-number">$47M+</div>
+            <div class="stat-card">
                 <div class="stat-label">Total Value Locked</div>
+                <div class="stat-value">$4.2B</div>
+                <div class="stat-change">+12.5% (24h)</div>
             </div>
-            <div class="stat-item">
-                <div class="stat-number">28.4%</div>
-                <div class="stat-label">Average APY</div>
+            <div class="stat-card">
+                <div class="stat-label">24h Trading Volume</div>
+                <div class="stat-value">$892M</div>
+                <div class="stat-change">+8.3% (24h)</div>
             </div>
-            <div class="stat-item">
-                <div class="stat-number">12,500+</div>
-                <div class="stat-label">Active Depositors</div>
+            <div class="stat-card">
+                <div class="stat-label">Active Users</div>
+                <div class="stat-value">156K</div>
+                <div class="stat-change">+15.2% (24h)</div>
             </div>
-            <div class="stat-item">
-                <div class="stat-number">$8.2M</div>
-                <div class="stat-label">Total Earned</div>
+            <div class="stat-card">
+                <div class="stat-label">Total Transactions</div>
+                <div class="stat-value">2.4M</div>
+                <div class="stat-change">+6.7% (24h)</div>
             </div>
         </div>
-    </section>
 
-    <section class="features" id="features">
-        <div class="section-header">
-            <div class="section-label">Platform Features</div>
-            <h2 class="section-title">Built for performance and security</h2>
-            <p class="section-description">Enterprise-grade infrastructure meets seamless user experience. Every feature designed to maximize your returns while minimizing risk.</p>
+        <!-- Trading Interface -->
+        <div class="trading-section">
+            <div class="trading-header">
+                <h2>Quick Swap</h2>
+                <div class="token-selector">
+                    <button class="token-btn active">ETH</button>
+                    <button class="token-btn">USDC</button>
+                    <button class="token-btn">DAI</button>
+                    <button class="token-btn">WBTC</button>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>From</label>
+                <div class="input-wrapper">
+                    <input type="text" placeholder="0.0" />
+                    <button class="max-btn">MAX</button>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>To</label>
+                <div class="input-wrapper">
+                    <input type="text" placeholder="0.0" readonly />
+                </div>
+            </div>
+            <button class="swap-btn" onclick="executeSwap()">Swap Tokens</button>
         </div>
-        
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">⚙️</div>
-                <h3>Automated Compounding</h3>
-                <p>Yields are harvested and reinvested multiple times daily. Maximize compound returns without manual intervention or gas fees.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3>Smart Rebalancing</h3>
-                <p>Algorithms continuously scan protocols for optimal yields. Your capital automatically moves to the highest-performing strategies.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🛡️</div>
-                <h3>Multi-Layer Security</h3>
-                <p>Audited by leading firms. Multi-signature controls. $2M bug bounty program. Your funds protected by institutional standards.</p>
-            </div>
+
+        <!-- Features -->
+        <div class="features">
             <div class="feature-card">
                 <div class="feature-icon">⚡</div>
-                <h3>Gas Optimization</h3>
-                <p>Batched transactions reduce costs by 90%. More of your returns stay in your pocket instead of paying network fees.</p>
+                <h3>Lightning Fast</h3>
+                <p>Execute trades in milliseconds with our advanced routing algorithm and optimized smart contracts.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🔓</div>
-                <h3>Instant Liquidity</h3>
-                <p>No lock-up periods. Withdraw your funds at any time without penalties. Complete control over your capital.</p>
+                <div class="feature-icon">🔒</div>
+                <h3>Secure & Audited</h3>
+                <p>Multiple security audits by top firms. Your funds are protected by battle-tested smart contracts.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">📈</div>
-                <h3>Real-Time Analytics</h3>
-                <p>Track performance, historical yields, and strategy composition. Complete transparency into how your money works.</p>
+                <div class="feature-icon">💰</div>
+                <h3>Earn Rewards</h3>
+                <p>Provide liquidity and stake tokens to earn competitive yields and governance tokens.</p>
             </div>
         </div>
-    </section>
+    </main>
 
-    <section class="how-it-works" id="how">
-        <div class="section-header">
-            <div class="section-label">Getting Started</div>
-            <h2 class="section-title">Start earning in minutes</h2>
-            <p class="section-description">A streamlined process designed for both beginners and experienced DeFi users.</p>
-        </div>
-        
-        <div class="steps-container">
-            <div class="step">
-                <div class="step-number">1</div>
-                <h3>Connect Wallet</h3>
-                <p>Connect your Web3 wallet. We support all major wallets and multiple networks.</p>
-            </div>
-            <div class="step">
-                <div class="step-number">2</div>
-                <h3>Select Strategy</h3>
-                <p>Choose from curated vaults based on your risk tolerance and asset preferences.</p>
-            </div>
-            <div class="step">
-                <div class="step-number">3</div>
-                <h3>Deposit Assets</h3>
-                <p>Deposit any amount. Smart contracts immediately deploy your capital across optimal protocols.</p>
-            </div>
-            <div class="step">
-                <div class="step-number">4</div>
-                <h3>Earn Passively</h3>
-                <p>Watch your balance grow. Withdraw anytime with instant settlement.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="vaults-section" id="vaults">
-        <div class="section-header">
-            <div class="section-label">Investment Vaults</div>
-            <h2 class="section-title">Diversified strategies for every profile</h2>
-            <p class="section-description">Each vault is optimized for specific assets and risk levels, backed by audited smart contracts.</p>
-        </div>
-        
-        <div class="vaults-grid">
-            <div class="vault-card">
-                <div class="vault-header">
-                    <div class="vault-title">
-                        <div class="vault-icon">💵</div>
-                        <div class="vault-name">USDC Stable Yield</div>
-                    </div>
-                    <div class="vault-apy">
-                        <div class="apy-value">24.3%</div>
-                        <div class="apy-label">APY</div>
-                    </div>
-                </div>
-                <div class="vault-metrics">
-                    <div class="metric">
-                        <div class="metric-label">Total Value Locked</div>
-                        <div class="metric-value">$18.4M</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-label">Depositors</div>
-                        <div class="metric-value">4,821</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-label">Strategy</div>
-                        <div class="metric-value">Aave + Compound</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-label">Network</div>
-                        <div class="metric-value">Arbitrum</div>
-                    </div>
-                </div>
-                <div class="vault-tags">
-                    <span class="tag low-risk">Low Risk</span>
-                    <span class="tag">Stablecoin</span>
-                </div>
-                <button class="deposit-btn">Deposit USDC</button>
-            </div>
-
-            <div class="vault-card">
-                <div class="vault-header">
-                    <div class="vault-title">
-                        <div class="vault-icon">💎</div>
-                        <div class="vault-name">ETH Optimized</div>
-                    </div>
-                    <div class="vault-apy">
-                        <div class="apy-value">31.7%</div>
-                        <div class="apy-label">APY</div>
-                    </div>
-                </div>
-                <div class="vault-metrics">
-                    <div class="metric">
-                        <div class="metric-label">Total Value Locked</div>
-                        <div class="metric-value">$22.1M</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-label">Depositors</div>
-                        <div class="metric-value">3,294</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-label">Strategy</div>
-                        <div class="metric-value">Lido + Curve</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-label">Network</div>
-                        <div class="metric-value">Ethereum</div>
-                    </div>
-                </div>
-                <div class="vault-tags">
-                    <span class="tag medium-risk">Medium Risk</span>
-                    <span class="tag">ETH</span>
-                </div>
-                <button class="deposit-btn">Deposit ETH</button>
-            </div>
-
-            <div class="vault-card">
-                <div class="vault-header">
-                    <div class="vault-title">
-                        <div class="vault-icon">🏦</div>
-                        <div class="vault-name">DAI Maximum</div>
-                    </div>
-                    <div class="vault-apy">
-                        <div class="apy-value">26.9%</div>
-                        <div class="apy-label">APY</div>
-                    </div>
-                </div>
-                <div class="vault-metrics">
-                    <div class="metric">
-                        <div class="metric-label">Total Value Locked</div>
-                        <div class="metric-value">$6.9M</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-label">Depositors</div>
-                        <div class="metric-value">2,385</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-label">Strategy</div>
-                        <div class="metric-value">Maker + Uniswap</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-label">Network</div>
-                        <div class="metric-value">Optimism</div>
-                    </div>
-                </div>
-                <div class="vault-tags">
-                    <span class="tag low-risk">Low Risk</span>
-                    <span class="tag">Stablecoin</span>
-                </div>
-                <button class="deposit-btn">Deposit DAI</button>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta-section">
-        <div class="cta-content">
-            <h2>Ready to optimize your yields?</h2>
-            <p>Join thousands of users earning institutional-grade returns with complete transparency and security.</p>
-            <button class="btn-primary" onclick="connectWallet()">Connect Wallet & Start Earning</button>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <div class="footer-logo">YieldForge</div>
-                <p class="footer-description">Institutional-grade DeFi yield optimization. Automated strategies for maximum returns with minimal risk.</p>
-            </div>
-            <div class="footer-section">
-                <h4>Product</h4>
-                <ul>
-                    <li><a href="#vaults">Vaults</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#how">How It Works</a></li>
-                    <li><a href="#docs">Documentation</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Resources</h4>
-                <ul>
-                    <li><a href="#">Help Center</a></li>
-                    <li><a href="#">Security</a></li>
-                    <li><a href="#">Audits</a></li>
-                    <li><a href="#">Bug Bounty</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Risk Disclosure</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div>&copy; 2026 YieldForge. All rights reserved.</div>
-            <div class="footer-links">
-                <a href="#">Twitter</a>
-                <a href="#">Discord</a>
-                <a href="#">Telegram</a>
-            </div>
-        </div>
-    </footer>
+    <!-- Network Indicator -->
+    <div class="network-indicator">
+        <div class="network-dot"></div>
+        <span>Ethereum Mainnet</span>
+    </div>
 
     <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Smooth scroll
-        function scrollToSection(sectionId) {
-            const element = document.getElementById(sectionId);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
+        // Theme Toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            const theme = document.body.classList.contains('light-theme') ? 'light' : 'dark';
+            localStorage.setItem('theme', theme);
         }
 
-        // Hamburger menu
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('navLinks');
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            hamburger.classList.toggle('active');
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-theme');
+        }
+
+        // Sidebar Toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('collapsed');
+            const toggle = document.querySelector('.sidebar-toggle');
+            toggle.textContent = sidebar.classList.contains('collapsed') ? '▶' : '◀';
+        }
+
+        // Sidebar Navigation
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
         });
 
-        // Mock wallet connection (for demo; integrate with Web3 in production)
+        // Token Selector
+        document.querySelectorAll('.token-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.token-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Connect Wallet
         function connectWallet() {
-            alert('Connecting wallet... (This is a demo. In production, integrate with Web3.js or ethers.js)');
+            const btn = document.querySelector('.wallet-btn');
+            btn.textContent = 'Connecting...';
+            setTimeout(() => {
+                btn.textContent = '0x742d...5f3a';
+                btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+            }, 1500);
         }
 
-        // Intersection Observer for animations
+        // Execute Swap
+        function executeSwap() {
+            const btn = document.querySelector('.swap-btn');
+            btn.textContent = 'Processing...';
+            btn.style.opacity = '0.7';
+            setTimeout(() => {
+                btn.textContent = 'Swap Successful! ✓';
+                btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                setTimeout(() => {
+                    btn.textContent = 'Swap Tokens';
+                    btn.style.background = 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))';
+                    btn.style.opacity = '1';
+                }, 2000);
+            }, 2000);
+        }
+
+        // Animate stats on scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.style.animation = 'fadeIn 0.6s ease';
                 }
             });
-        }, { threshold: 0.1 });
+        });
 
-        document.querySelectorAll('.stat-item, .feature-card, .step, .vault-card').forEach(el => {
-            observer.observe(el);
+        document.querySelectorAll('.stat-card, .feature-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Parallax effect
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.stat-card, .feature-card');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const cardX = (rect.left + rect.width / 2) / window.innerWidth;
+                const cardY = (rect.top + rect.height / 2) / window.innerHeight;
+                
+                const deltaX = (x - cardX) * 10;
+                const deltaY = (y - cardY) * 10;
+                
+                card.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+            });
         });
     </script>
 </body>
