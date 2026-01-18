@@ -1,61 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="NexaFi — Next-generation DeFi protocol. Advanced trading, liquidity provision, staking and yield optimization on Ethereum and L2s."/>
-    <title>NexaFi — Advanced DeFi Protocol</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwapFlow - Next Generation DEX</title>
     <style>
-        :root {
-            --bg-primary:     #0b0f2b;
-            --bg-secondary:   #11173a;
-            --bg-elevated:    #1a2144;
-            --bg-card:        #1f274e;
-
-            --accent:         #00d4ff;
-            --accent-dark:    #00a0cc;
-            --purple:         #7c3aed;
-            --purple-dark:    #5b21b6;
-
-            --text-primary:   #f8fafc;
-            --text-secondary: #94a3b8;
-            --text-muted:     #64748b;
-
-            --success:        #22c55e;
-            --warning:        #f59e0b;
-            --danger:         #ef4444;
-
-            --border:         rgba(0, 212, 255, 0.12);
-            --border-strong:  rgba(0, 212, 255, 0.22);
-
-            --radius:         14px;
-            --transition:     all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .light {
-            --bg-primary:     #f8fafc;
-            --bg-secondary:   #ffffff;
-            --bg-elevated:    #f1f5f9;
-            --bg-card:        #ffffff;
-
-            --accent:         #0284c7;
-            --accent-dark:    #0369a1;
-            --purple:         #7c3aed;
-            --purple-dark:    #6d28d9;
-
-            --text-primary:   #0f172a;
-            --text-secondary: #475569;
-            --text-muted:     #64748b;
-
-            --border:         rgba(2, 132, 199, 0.16);
-            --border-strong:  rgba(2, 132, 199, 0.28);
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -63,609 +12,776 @@
         }
 
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
             min-height: 100vh;
-            line-height: 1.5;
+            color: white;
             overflow-x: hidden;
         }
 
-        /* ────────────────────────────────────────────────
-           Navigation & Layout
-        ──────────────────────────────────────────────── */
-
-        .navbar {
+        /* Animated Background */
+        .bg-animation {
             position: fixed;
-            inset: 0 0 auto 0;
-            height: 72px;
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            z-index: 1200;
-            transition: var(--transition);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .blob1 {
+            width: 500px;
+            height: 500px;
+            background: #8b5cf6;
+            top: -200px;
+            left: -200px;
+            animation-delay: 0s;
+        }
+
+        .blob2 {
+            width: 400px;
+            height: 400px;
+            background: #3b82f6;
+            top: 50%;
+            right: -150px;
+            animation-delay: 7s;
+        }
+
+        .blob3 {
+            width: 450px;
+            height: 450px;
+            background: #ec4899;
+            bottom: -200px;
+            left: 30%;
+            animation-delay: 14s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(100px, -100px) scale(1.1); }
+            66% { transform: translate(-100px, 100px) scale(0.9); }
+        }
+
+        /* Navigation */
+        nav {
+            position: relative;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .nav-container {
-            max-width: 1480px;
+            max-width: 1400px;
             margin: 0 auto;
-            height: 100%;
-            padding: 0 1.5rem;
+            padding: 1.5rem 2rem;
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 12px;
             font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, var(--accent), var(--purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-weight: bold;
         }
 
-        .logo-symbol {
-            width: 38px;
-            height: 38px;
-            background: linear-gradient(135deg, var(--accent), var(--purple));
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
             border-radius: 10px;
-            display: grid;
-            place-items: center;
-            font-size: 1.4rem;
-            color: white;
-            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
         }
 
         .nav-links {
             display: flex;
-            gap: 2.25rem;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
             font-weight: 500;
         }
 
-        .nav-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            position: relative;
-            transition: var(--transition);
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--text-primary);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            inset: auto 0  -6px 0;
-            height: 2.5px;
-            background: linear-gradient(to right, var(--accent), var(--purple));
-            border-radius: 2px;
-            transform: scaleX(0);
-            transform-origin: center;
-            transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            transform: scaleX(1);
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 1.1rem;
-        }
-
-        .theme-switch {
-            width: 48px;
-            height: 26px;
-            background: var(--bg-elevated);
-            border-radius: 999px;
-            position: relative;
-            cursor: pointer;
-            border: 2px solid var(--border);
-            transition: var(--transition);
-        }
-
-        .theme-switch::before {
-            content: '';
-            position: absolute;
-            inset: 3px;
-            width: 18px;
-            height: 18px;
-            background: linear-gradient(135deg, var(--accent), var(--purple));
-            border-radius: 50%;
-            transition: transform 0.36s cubic-bezier(0.4,0,0.2,1);
-        }
-
-        .light .theme-switch::before {
-            transform: translateX(22px);
+        .nav-links a:hover {
+            color: white;
         }
 
         .connect-btn {
-            padding: 0.65rem 1.6rem;
-            background: linear-gradient(135deg, var(--accent), var(--purple));
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
             color: white;
             border: none;
-            border-radius: 10px;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
             font-weight: 600;
             cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 4px 18px rgba(0,212,255,0.22);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .connect-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 8px 28px rgba(0,212,255,0.35);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.4);
         }
 
-        /* Sidebar ──────────────────────────────────────── */
-
-        .sidebar {
-            position: fixed;
-            inset: 72px  auto 0 0;
-            width: 260px;
-            background: var(--bg-secondary);
-            border-right: 1px solid var(--border);
-            padding: 1.8rem 0;
-            transition: width 0.36s cubic-bezier(0.4,0,0.2,1);
-            z-index: 1100;
-            overflow-y: auto;
-        }
-
-        .sidebar.collapsed {
-            width: 76px;
-        }
-
-        .sidebar-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem 1.4rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
+        /* Main Container */
+        .container {
             position: relative;
+            z-index: 10;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
         }
 
-        .sidebar-item:hover {
-            background: var(--bg-card);
-            color: var(--accent);
-        }
-
-        .sidebar-item.active {
-            background: rgba(var(--accent-rgb,0,212,255), 0.08);
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        .sidebar-item.active::before {
-            content: '';
-            position: absolute;
-            inset: 0 auto 0 0;
-            width: 4px;
-            background: var(--accent);
-        }
-
-        .sidebar.collapsed .sidebar-text {
-            display: none;
-        }
-
-        .sidebar-toggle-btn {
-            position: absolute;
-            right: -14px;
-            top: 1.8rem;
-            width: 28px;
-            height: 28px;
-            background: var(--accent);
-            color: white;
-            border-radius: 50%;
-            display: grid;
-            place-items: center;
-            font-size: 1.1rem;
-            cursor: pointer;
-            box-shadow: 0 3px 12px rgba(0,212,255,0.4);
-            transition: var(--transition);
-        }
-
-        .sidebar.collapsed .sidebar-toggle-btn {
-            transform: rotate(180deg);
-        }
-
-        /* Main Content ─────────────────────────────────── */
-
-        .main {
-            margin-left: 260px;
-            margin-top: 72px;
-            padding: 2rem 2.5rem 4rem;
-            transition: margin-left 0.36s cubic-bezier(0.4,0,0.2,1);
-        }
-
-        .sidebar.collapsed ~ .main {
-            margin-left: 76px;
-        }
-
+        /* Hero Section */
         .hero {
             text-align: center;
-            padding: 5rem 1rem 6rem;
-            position: relative;
+            margin-bottom: 4rem;
         }
 
         .hero h1 {
-            font-size: clamp(2.8rem, 6vw, 4.6rem);
-            font-weight: 700;
-            letter-spacing: -0.025em;
-            background: linear-gradient(135deg, var(--accent), var(--purple) 70%);
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff, #8b5cf6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 1.2rem;
-            line-height: 1.05;
+            background-clip: text;
         }
 
         .hero p {
-            font-size: 1.32rem;
-            color: var(--text-secondary);
-            max-width: 620px;
-            margin: 0 auto 2.8rem;
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto 2rem;
         }
 
-        /* Stats ────────────────────────────────────────── */
-
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-            margin: 3.5rem 0;
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 3rem;
         }
 
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 1.8rem 2rem;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-6px);
-            border-color: var(--accent);
-            box-shadow: 0 16px 40px rgba(0,212,255,0.14);
-        }
-
-        .stat-label {
-            color: var(--text-muted);
-            font-size: 0.92rem;
-            font-weight: 500;
-            margin-bottom: 0.6rem;
+        .stat-item {
+            text-align: center;
         }
 
         .stat-value {
-            font-size: 2.1rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #8b5cf6;
         }
 
-        .stat-change {
+        .stat-label {
+            color: rgba(255, 255, 255, 0.6);
             font-size: 0.9rem;
-            font-weight: 600;
             margin-top: 0.5rem;
-            display: inline-block;
         }
 
-        .positive { color: var(--success); }
-        .negative { color: var(--danger); }
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
 
-        /* Swap Card ────────────────────────────────────── */
-
-        .swap-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
+        /* Swap Card */
+        .card {
+            background: rgba(30, 27, 75, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 24px;
             padding: 2rem;
-            max-width: 480px;
-            margin: 3rem auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
 
-        .swap-header {
+        .card-header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.8rem;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .swap-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-        }
-
-        .network-badge {
-            background: rgba(var(--accent-rgb,0,212,255), 0.12);
-            color: var(--accent);
-            padding: 0.4rem 1rem;
-            border-radius: 999px;
-            font-size: 0.84rem;
-            font-weight: 600;
-        }
-
-        .swap-input-group {
-            background: var(--bg-elevated);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.4rem 1.6rem;
-            margin-bottom: 1rem;
-            transition: var(--transition);
-        }
-
-        .swap-input-group:focus-within {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(0,212,255,0.18);
-        }
-
-        .swap-label-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.8rem;
-            font-size: 0.92rem;
-        }
-
-        .swap-amount-input {
-            background: none;
+        .tab {
+            flex: 1;
+            padding: 1rem;
+            background: transparent;
             border: none;
-            font-size: 2.1rem;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
             font-weight: 600;
-            color: var(--text-primary);
-            width: 100%;
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab.active {
+            color: white;
+            border-bottom-color: #8b5cf6;
+        }
+
+        .tab:hover {
+            color: white;
+        }
+
+        .swap-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .token-input {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .token-input-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .token-input-body {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .token-input input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
             outline: none;
         }
 
-        .swap-currency {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
+        .token-input input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .token-select {
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.5);
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
             font-weight: 600;
-            padding: 0.5rem 1rem;
-            background: rgba(var(--accent-rgb,0,212,255), 0.1);
-            border-radius: 999px;
             cursor: pointer;
+            transition: all 0.3s;
         }
 
-        .swap-arrow {
-            width: 44px;
-            height: 44px;
-            background: var(--bg-secondary);
-            border: 4px solid var(--bg-primary);
+        .token-select:hover {
+            background: rgba(139, 92, 246, 0.3);
+        }
+
+        .swap-icon {
+            text-align: center;
+            margin: 0.5rem 0;
+        }
+
+        .swap-button {
+            width: 40px;
+            height: 40px;
+            background: rgba(139, 92, 246, 0.2);
+            border: 2px solid rgba(139, 92, 246, 0.5);
             border-radius: 50%;
-            display: grid;
-            place-items: center;
-            font-size: 1.4rem;
-            margin: -1.2rem auto;
-            position: relative;
-            z-index: 2;
-            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
-        .swap-execute-btn {
+        .swap-button:hover {
+            background: rgba(139, 92, 246, 0.4);
+            transform: rotate(180deg);
+        }
+
+        .action-button {
             width: 100%;
-            padding: 1.25rem;
-            margin-top: 1.5rem;
-            background: linear-gradient(135deg, var(--accent), var(--purple));
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
             color: white;
             border: none;
-            border-radius: 12px;
-            font-size: 1.12rem;
+            padding: 1.25rem;
+            border-radius: 16px;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: var(--transition);
+            margin-top: 1.5rem;
+            transition: all 0.3s;
         }
 
-        .swap-execute-btn:hover {
+        .action-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0,212,255,0.3);
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.5);
         }
 
-        /* Responsive ───────────────────────────────────── */
+        .action-button:disabled {
+            background: rgba(255, 255, 255, 0.1);
+            cursor: not-allowed;
+            transform: none;
+        }
 
-        @media (max-width: 1024px) {
-            .sidebar {
-                transform: translateX(-100%);
+        .rate-info {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 12px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: rgba(30, 27, 75, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        /* Liquidity Pool Display */
+        .pool-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .pool-item {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .pool-item:hover {
+            border-color: rgba(139, 92, 246, 0.5);
+            transform: translateX(5px);
+        }
+
+        .pool-tokens {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .pool-stats {
+            display: flex;
+            gap: 2rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .pool-stat span {
+            color: #8b5cf6;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .main-content {
+                grid-template-columns: 1fr;
             }
-            .sidebar.open {
-                transform: translateX(0);
+
+            .features {
+                grid-template-columns: 1fr;
             }
-            .main {
-                margin-left: 0 !important;
+
+            .stats {
+                flex-direction: column;
+                gap: 2rem;
             }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
             .nav-links {
                 display: none;
             }
         }
 
-        @media (max-width: 640px) {
-            .hero h1 { font-size: 2.6rem; }
-            .hero p  { font-size: 1.15rem; }
-            .stats-container { gap: 1rem; }
+        /* Success Animation */
+        @keyframes success {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .success-message {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.5);
+            color: #22c55e;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            animation: success 0.5s ease;
         }
     </style>
 </head>
 <body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="blob blob1"></div>
+        <div class="blob blob2"></div>
+        <div class="blob blob3"></div>
+    </div>
 
-    <!-- Top Navigation -->
-    <nav class="navbar">
+    <!-- Navigation -->
+    <nav>
         <div class="nav-container">
             <div class="logo">
-                <div class="logo-symbol">N</div>
-                NexaFi
+                <div class="logo-icon">⚡</div>
+                <span>SwapFlow</span>
             </div>
-
             <div class="nav-links">
-                <a href="#" class="nav-link active">Swap</a>
-                <a href="#" class="nav-link">Pools</a>
-                <a href="#" class="nav-link">Stake</a>
-                <a href="#" class="nav-link">Analytics</a>
-                <a href="#" class="nav-link">Docs</a>
+                <a href="#swap">Swap</a>
+                <a href="#pools">Pools</a>
+                <a href="#earn">Earn</a>
+                <a href="#docs">Docs</a>
             </div>
-
-            <div class="header-actions">
-                <div class="theme-switch" onclick="toggleTheme()"></div>
-                <button class="connect-btn" onclick="mockConnect()">Connect Wallet</button>
-            </div>
+            <button class="connect-btn" onclick="connectWallet()">Connect Wallet</button>
         </div>
     </nav>
 
-    <!-- Sidebar (collapsible on desktop, drawer on mobile) -->
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-toggle-btn" onclick="toggleSidebar()">←</div>
-
-        <a href="#" class="sidebar-item active">
-            <span>↔</span>
-            <span class="sidebar-text">Swap</span>
-        </a>
-        <a href="#" class="sidebar-item">
-            <span>💧</span>
-            <span class="sidebar-text">Liquidity</span>
-        </a>
-        <a href="#" class="sidebar-item">
-            <span>🔒</span>
-            <span class="sidebar-text">Staking</span>
-        </a>
-        <a href="#" class="sidebar-item">
-            <span>📈</span>
-            <span class="sidebar-text">Analytics</span>
-        </a>
-        <a href="#" class="sidebar-item">
-            <span>⚙️</span>
-            <span class="sidebar-text">Settings</span>
-        </a>
-    </aside>
-
-    <!-- Main Content Area -->
-    <main class="main">
-
-        <section class="hero">
-            <h1>Next-Generation DeFi</h1>
-            <p>Trade efficiently • Provide liquidity • Earn sustainable yields • All in one powerful interface</p>
-        </section>
-
-        <!-- Stats Overview -->
-        <div class="stats-container">
-            <div class="stat-card">
-                <div class="stat-label">TVL</div>
-                <div class="stat-value">$4.68B</div>
-                <div class="stat-change positive">+14.2% (24h)</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">24h Volume</div>
-                <div class="stat-value">$927M</div>
-                <div class="stat-change positive">+11.8%</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Active Wallets</div>
-                <div class="stat-value">178,400</div>
-                <div class="stat-change positive">+18.6%</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Total Transactions</div>
-                <div class="stat-value">3.1M</div>
-                <div class="stat-change positive">+9.4%</div>
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Trade Crypto in Seconds</h1>
+            <p>The fastest, most secure decentralized exchange. Swap tokens, provide liquidity, and earn rewards.</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value">$2.5B+</div>
+                    <div class="stat-label">Total Volume</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">150K+</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">$450M+</div>
+                    <div class="stat-label">Total Liquidity</div>
+                </div>
             </div>
         </div>
 
-        <!-- Swap Widget -->
-        <div class="swap-card">
-            <div class="swap-header">
-                <h2 class="swap-title">Swap</h2>
-                <div class="network-badge">Ethereum • Arbitrum</div>
-            </div>
-
-            <div class="swap-input-group">
-                <div class="swap-label-row">
-                    <span>You pay</span>
-                    <span>Balance: 12.847 ETH</span>
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Swap/Liquidity Card -->
+            <div class="card">
+                <div class="card-header">
+                    <button class="tab active" onclick="switchTab('swap')">Swap</button>
+                    <button class="tab" onclick="switchTab('liquidity')">Liquidity</button>
                 </div>
-                <div style="display:flex; align-items:center; gap:1rem;">
-                    <input class="swap-amount-input" type="text" placeholder="0.0" inputmode="decimal" />
-                    <div class="swap-currency">
-                        <img src="https://assets.coingecko.com/coins/images/279/small/ethereum.png" width="24" height="24" alt="ETH"/>
-                        ETH
+
+                <!-- Swap Interface -->
+                <div id="swap-interface">
+                    <div class="swap-container">
+                        <div class="token-input">
+                            <div class="token-input-header">
+                                <span>You pay</span>
+                                <span>Balance: 0.00</span>
+                            </div>
+                            <div class="token-input-body">
+                                <input type="number" id="from-amount" placeholder="0.0" oninput="calculateSwap()">
+                                <select class="token-select" id="from-token" onchange="calculateSwap()">
+                                    <option value="ETH">ETH</option>
+                                    <option value="USDC">USDC</option>
+                                    <option value="USDT">USDT</option>
+                                    <option value="DAI">DAI</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="swap-icon">
+                            <button class="swap-button" onclick="swapTokens()">↓↑</button>
+                        </div>
+
+                        <div class="token-input">
+                            <div class="token-input-header">
+                                <span>You receive</span>
+                                <span>Balance: 0.00</span>
+                            </div>
+                            <div class="token-input-body">
+                                <input type="number" id="to-amount" placeholder="0.0" readonly>
+                                <select class="token-select" id="to-token" onchange="calculateSwap()">
+                                    <option value="USDC">USDC</option>
+                                    <option value="ETH">ETH</option>
+                                    <option value="USDT">USDT</option>
+                                    <option value="DAI">DAI</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="rate-info" id="rate-info" style="display: none;">
+                            <div>Rate: <span id="exchange-rate">-</span></div>
+                            <div>Fee (0.3%): <span id="fee-amount">-</span></div>
+                        </div>
+
+                        <button class="action-button" onclick="executeSwap()">Swap Tokens</button>
+                        
+                        <div id="success-msg" style="display: none;"></div>
+                    </div>
+                </div>
+
+                <!-- Liquidity Interface -->
+                <div id="liquidity-interface" style="display: none;">
+                    <div class="swap-container">
+                        <div class="token-input">
+                            <div class="token-input-header">
+                                <span>Token A</span>
+                            </div>
+                            <div class="token-input-body">
+                                <input type="number" id="liquidity-amount-a" placeholder="0.0">
+                                <select class="token-select">
+                                    <option value="ETH">ETH</option>
+                                    <option value="USDC">USDC</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="token-input">
+                            <div class="token-input-header">
+                                <span>Token B</span>
+                            </div>
+                            <div class="token-input-body">
+                                <input type="number" id="liquidity-amount-b" placeholder="0.0">
+                                <select class="token-select">
+                                    <option value="USDC">USDC</option>
+                                    <option value="ETH">ETH</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button class="action-button" onclick="addLiquidity()">Add Liquidity</button>
                     </div>
                 </div>
             </div>
 
-            <div class="swap-arrow">↓</div>
-
-            <div class="swap-input-group">
-                <div class="swap-label-row">
-                    <span>You receive</span>
-                    <span>Balance: 18,420.6 USDC</span>
-                </div>
-                <div style="display:flex; align-items:center; gap:1rem;">
-                    <input class="swap-amount-input" type="text" placeholder="0.0" readonly />
-                    <div class="swap-currency">
-                        <img src="https://assets.coingecko.com/coins/images/6319/small/USD_Coin_icon.png" width="24" height="24" alt="USDC"/>
-                        USDC
+            <!-- Pool Info Card -->
+            <div class="card">
+                <h2 style="margin-bottom: 1.5rem;">Top Liquidity Pools</h2>
+                <div class="pool-list">
+                    <div class="pool-item">
+                        <div class="pool-tokens">ETH/USDC</div>
+                        <div class="pool-stats">
+                            <div class="pool-stat">TVL: <span>$125M</span></div>
+                            <div class="pool-stat">APR: <span>24.5%</span></div>
+                        </div>
+                    </div>
+                    <div class="pool-item">
+                        <div class="pool-tokens">ETH/USDT</div>
+                        <div class="pool-stats">
+                            <div class="pool-stat">TVL: <span>$98M</span></div>
+                            <div class="pool-stat">APR: <span>18.2%</span></div>
+                        </div>
+                    </div>
+                    <div class="pool-item">
+                        <div class="pool-tokens">USDC/DAI</div>
+                        <div class="pool-stats">
+                            <div class="pool-stat">TVL: <span>$76M</span></div>
+                            <div class="pool-stat">APR: <span>12.8%</span></div>
+                        </div>
+                    </div>
+                    <div class="pool-item">
+                        <div class="pool-tokens">ETH/DAI</div>
+                        <div class="pool-stats">
+                            <div class="pool-stat">TVL: <span>$54M</span></div>
+                            <div class="pool-stat">APR: <span>21.3%</span></div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <button class="swap-execute-btn" onclick="mockSwap()">Swap</button>
         </div>
 
-    </main>
+        <!-- Features Section -->
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Lightning Fast</h3>
+                <p>Execute trades in milliseconds with our optimized smart contracts and Layer 2 integration.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>Secure & Audited</h3>
+                <p>Multi-signature security, audited smart contracts, and decentralized architecture.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Earn Rewards</h3>
+                <p>Provide liquidity and earn up to 24% APR from trading fees and incentives.</p>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // Theme
-        function toggleTheme() {
-            document.body.classList.toggle('light');
-            localStorage.setItem('nexafi-theme', document.body.classList.contains('light') ? 'light' : 'dark');
-        }
+        // Mock exchange rates
+        const rates = {
+            'ETH': { 'USDC': 2500, 'USDT': 2500, 'DAI': 2500 },
+            'USDC': { 'ETH': 0.0004, 'USDT': 1, 'DAI': 1 },
+            'USDT': { 'ETH': 0.0004, 'USDC': 1, 'DAI': 1 },
+            'DAI': { 'ETH': 0.0004, 'USDC': 1, 'USDT': 1 }
+        };
 
-        if (localStorage.getItem('nexafi-theme') === 'light') {
-            document.body.classList.add('light');
-        }
+        function switchTab(tab) {
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
 
-        // Sidebar
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('collapsed');
-        }
-
-        // Mock interactions
-        function mockConnect() {
-            const btn = document.querySelector('.connect-btn');
-            btn.textContent = '0x742d…5f3a';
-            btn.style.background = 'linear-gradient(135deg, #22c55e, #15803d)';
-        }
-
-        function mockSwap() {
-            const btn = document.querySelector('.swap-execute-btn');
-            const original = btn.textContent;
-            btn.disabled = true;
-            btn.textContent = 'Processing...';
-            setTimeout(() => {
-                btn.textContent = 'Success ✓';
-                btn.style.background = 'linear-gradient(135deg, #22c55e, #15803d)';
-                setTimeout(() => {
-                    btn.textContent = original;
-                    btn.disabled = false;
-                    btn.style.background = '';
-                }, 1800);
-            }, 1400);
-        }
-
-        // Mobile sidebar toggle (can be triggered by hamburger in future)
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') {
-                document.getElementById('sidebar').classList.remove('open');
+            if (tab === 'swap') {
+                document.getElementById('swap-interface').style.display = 'block';
+                document.getElementById('liquidity-interface').style.display = 'none';
+            } else {
+                document.getElementById('swap-interface').style.display = 'none';
+                document.getElementById('liquidity-interface').style.display = 'block';
             }
-        });
+        }
+
+        function calculateSwap() {
+            const fromAmount = document.getElementById('from-amount').value;
+            const fromToken = document.getElementById('from-token').value;
+            const toToken = document.getElementById('to-token').value;
+            const toAmountInput = document.getElementById('to-amount');
+            const rateInfo = document.getElementById('rate-info');
+            const rateDisplay = document.getElementById('exchange-rate');
+            const feeDisplay = document.getElementById('fee-amount');
+
+            if (!fromAmount || fromAmount <= 0) {
+                toAmountInput.value = '';
+                rateInfo.style.display = 'none';
+                return;
+            }
+
+            const rate = rates[fromToken][toToken];
+            const fee = parseFloat(fromAmount) * 0.003;
+            const amountAfterFee = parseFloat(fromAmount) - fee;
+            const outputAmount = amountAfterFee * rate;
+
+            toAmountInput.value = outputAmount.toFixed(4);
+            rateDisplay.textContent = `1 ${fromToken} = ${rate.toFixed(4)} ${toToken}`;
+            feeDisplay.textContent = `${fee.toFixed(6)} ${fromToken}`;
+            rateInfo.style.display = 'block';
+        }
+
+        function swapTokens() {
+            const fromToken = document.getElementById('from-token');
+            const toToken = document.getElementById('to-token');
+            
+            const tempValue = fromToken.value;
+            fromToken.value = toToken.value;
+            toToken.value = tempValue;
+            
+            document.getElementById('from-amount').value = '';
+            document.getElementById('to-amount').value = '';
+            document.getElementById('rate-info').style.display = 'none';
+        }
+
+        function executeSwap() {
+            const fromAmount = document.getElementById('from-amount').value;
+            const fromToken = document.getElementById('from-token').value;
+            const toToken = document.getElementById('to-token').value;
+            const toAmount = document.getElementById('to-amount').value;
+
+            if (!fromAmount || fromAmount <= 0) {
+                alert('Please enter an amount to swap');
+                return;
+            }
+
+            const successMsg = document.getElementById('success-msg');
+            successMsg.className = 'success-message';
+            successMsg.textContent = `✓ Successfully swapped ${fromAmount} ${fromToken} for ${toAmount} ${toToken}!`;
+            successMsg.style.display = 'block';
+
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+                document.getElementById('from-amount').value = '';
+                document.getElementById('to-amount').value = '';
+                document.getElementById('rate-info').style.display = 'none';
+            }, 3000);
+        }
+
+        function addLiquidity() {
+            const amountA = document.getElementById('liquidity-amount-a').value;
+            const amountB = document.getElementById('liquidity-amount-b').value;
+
+            if (!amountA || !amountB || amountA <= 0 || amountB <= 0) {
+                alert('Please enter amounts for both tokens');
+                return;
+            }
+
+            alert(`✓ Successfully added liquidity!\n${amountA} ETH + ${amountB} USDC`);
+            document.getElementById('liquidity-amount-a').value = '';
+            document.getElementById('liquidity-amount-b').value = '';
+        }
+
+        function connectWallet() {
+            alert('🔗 Wallet connection coming soon!\n\nIn production, this will connect to MetaMask, WalletConnect, or other Web3 wallets.');
+        }
     </script>
 </body>
 </html>
