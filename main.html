@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YieldForge - Institutional-Grade DeFi Yield Optimization</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FAFBFC;
+            color: #1A1D1F;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #E8EBED;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0F172A;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #475569;
+            font-weight: 500;
+            font-size: 0.938rem;
+            transition: color 0.2s ease;
+            letter-spacing: -0.01em;
+        }
+
+        .nav-links a:hover {
+            color: #0F172A;
+        }
+
+        .connect-wallet {
+            padding: 0.625rem 1.5rem;
+            background: #0F172A;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            letter-spacing: -0.01em;
+        }
+
+        .connect-wallet:hover {
+            background: #1E293B;
+            transform: translateY(-1px);
+        }
+
+        .hero {
+            margin-top: 72px;
+            padding: 8rem 2.5rem 6rem;
+            background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+            top: -300px;
+            right: 10%;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #F1F5F9;
+            border: 1px solid #E2E8F0;
+            border-radius: 100px;
+            font-size: 0.813rem;
+            font-weight: 500;
+            color: #475569;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .hero-badge-dot {
+            width: 6px;
+            height: 6px;
+            background: #10B981;
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: #0F172A;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+            max-width: 900px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #64748B;
+            max-width: 680px;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            letter-spacing: -0.01em;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn-primary {
+            padding: 1rem 2rem;
+            background: #0F172A;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            letter-spacing: -0.01em;
+        }
+
+        .btn-primary:hover {
+            background: #1E293B;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+        }
+
+        .btn-secondary {
+            padding: 1rem 2rem;
+            background: transparent;
+            color: #0F172A;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            letter-spacing: -0.01em;
+        }
+
+        .btn-secondary:hover {
+            border-color: #CBD5E1;
+            background: #F8FAFC;
+        }
+
+        .stats {
+            padding: 5rem 2.5rem;
+            background: white;
+            border-top: 1px solid #E8EBED;
+            border-bottom: 1px solid #E8EBED;
+        }
+
+        .stats-grid {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4rem;
+        }
+
+        .stat-item {
+            text-align: left;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #0F172A;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .stat-label {
+            font-size: 0.938rem;
+            color: #64748B;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+        }
+
+        .features {
+            padding: 7rem 2.5rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            max-width: 640px;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #3B82F6;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0F172A;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .section-description {
+            font-size: 1.125rem;
+            color: #64748B;
+            line-height: 1.7;
+            letter-spacing: -0.01em;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card {
+            padding: 2.5rem;
+            background: white;
+            border: 1px solid #E8EBED;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .feature-card:hover {
+            border-color: #CBD5E1;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: #F1F5F9;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #0F172A;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        .feature-card p {
+            color: #64748B;
+            line-height: 1.7;
+            font-size: 0.938rem;
+            letter-spacing: -0.01em;
+        }
+
+        .how-it-works {
+            padding: 7rem 2.5rem;
+            background: #F8FAFC;
+        }
+
+        .steps-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .step {
+            position: relative;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: #0F172A;
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #0F172A;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        .step p {
+            color: #64748B;
+            font-size: 0.938rem;
+            line-height: 1.7;
+            letter-spacing: -0.01em;
+        }
+
+        .vaults-section {
+            padding: 7rem 2.5rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .vaults-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .vault-card {
+            background: white;
+            border: 1px solid #E8EBED;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .vault-card:hover {
+            border-color: #CBD5E1;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .vault-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #F1F5F9;
+        }
+
+        .vault-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .vault-icon {
+            width: 40px;
+            height: 40px;
+            background: #F1F5F9;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .vault-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #0F172A;
+            letter-spacing: -0.01em;
+        }
+
+        .vault-apy {
+            text-align: right;
+        }
+
+        .apy-value {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #10B981;
+            letter-spacing: -0.02em;
+        }
+
+        .apy-label {
+            font-size: 0.75rem;
+            color: #64748B;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .vault-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .metric {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .metric-label {
+            font-size: 0.813rem;
+            color: #64748B;
+            font-weight: 500;
+        }
+
+        .metric-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #0F172A;
+            letter-spacing: -0.01em;
+        }
+
+        .vault-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            padding: 0.375rem 0.75rem;
+            background: #F1F5F9;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .tag.low-risk {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .tag.medium-risk {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .deposit-btn {
+            width: 100%;
+            padding: 0.875rem;
+            background: #0F172A;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.938rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            letter-spacing: -0.01em;
+        }
+
+        .deposit-btn:hover {
+            background: #1E293B;
+            transform: translateY(-1px);
+        }
+
+        .cta-section {
+            padding: 7rem 2.5rem;
+            background: #0F172A;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+            top: -250px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .cta-content {
+            max-width: 720px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .cta-section p {
+            font-size: 1.125rem;
+            color: #CBD5E1;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .cta-section .btn-primary {
+            background: white;
+            color: #0F172A;
+        }
+
+        .cta-section .btn-primary:hover {
+            background: #F1F5F9;
+        }
+
+        footer {
+            background: #FAFBFC;
+            padding: 4rem 2.5rem 2rem;
+            border-top: 1px solid #E8EBED;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            max-width: 280px;
+        }
+
+        .footer-logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0F172A;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .footer-description {
+            color: #64748B;
+            font-size: 0.938rem;
+            line-height: 1.7;
+            letter-spacing: -0.01em;
+        }
+
+        .footer-section h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #0F172A;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.01em;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section a {
+            color: #64748B;
+            text-decoration: none;
+            font-size: 0.938rem;
+            transition: color 0.2s ease;
+            letter-spacing: -0.01em;
+        }
+
+        .footer-section a:hover {
+            color: #0F172A;
+        }
+
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #E8EBED;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #64748B;
+            font-size: 0.875rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: #64748B;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: #0F172A;
+        }
+
+        @media (max-width: 1024px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2.5rem;
+            }
+
+            .features-grid,
+            .vaults-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .hero-cta button {
+                width: 100%;
+            }
+
+            .stats-grid,
+            .steps-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">YieldForge</div>
+            <ul class="nav-links">
+                <li><a href="#vaults">Vaults</a></li>
+                <li><a href="#how">How It Works</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#docs">Documentation</a></li>
+            </ul>
+            <button class="connect-wallet" onclick="connectWallet()">Connect Wallet</button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                Audited & Secure
+            </div>
+            <h1>Institutional-grade yield optimization for everyone</h1>
+            <p>Maximize returns across DeFi protocols with automated strategies. Earn superior yields on stablecoins and crypto assets with institutional-level security.</p>
+            <div class="hero-cta">
+                <button class="btn-primary" onclick="scrollToSection('vaults')">Explore Vaults</button>
+                <button class="btn-secondary" onclick="scrollToSection('how')">How It Works</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">$47M+</div>
+                <div class="stat-label">Total Value Locked</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">28.4%</div>
+                <div class="stat-label">Average APY</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">12,500+</div>
+                <div class="stat-label">Active Depositors</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">$8.2M</div>
+                <div class="stat-label">Total Earned</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="section-header">
+            <div class="section-label">Platform Features</div>
+            <h2 class="section-title">Built for performance and security</h2>
+            <p class="section-description">Enterprise-grade infrastructure meets seamless user experience. Every feature designed to maximize your returns while minimizing risk.</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <h3>Automated Compounding</h3>
+                <p>Yields are harvested and reinvested multiple times daily. Maximize compound returns without manual intervention or gas fees.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Smart Rebalancing</h3>
+                <p>Algorithms continuously scan protocols for optimal yields. Your capital automatically moves to the highest-performing strategies.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>Multi-Layer Security</h3>
+                <p>Audited by leading firms. Multi-signature controls. $2M bug bounty program. Your funds protected by institutional standards.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Gas Optimization</h3>
+                <p>Batched transactions reduce costs by 90%. More of your returns stay in your pocket instead of paying network fees.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔓</div>
+                <h3>Instant Liquidity</h3>
+                <p>No lock-up periods. Withdraw your funds at any time without penalties. Complete control over your capital.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3>Real-Time Analytics</h3>
+                <p>Track performance, historical yields, and strategy composition. Complete transparency into how your money works.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works" id="how">
+        <div class="features">
+            <div class="section-header">
+                <div class="section-label">Getting Started</div>
+                <h2 class="section-title">Start earning in minutes</h2>
+                <p class="section-description">A streamlined process designed for both beginners and experienced DeFi users.</p>
+            </div>
+            
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Connect Wallet</h3>
+                    <p>Connect your Web3 wallet. We support all major wallets and multiple networks.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Select Strategy</h3>
+                    <p>Choose from curated vaults based on your risk tolerance and asset preferences.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Deposit Assets</h3>
+                    <p>Deposit any amount. Smart contracts immediately deploy your capital across optimal protocols.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Earn Passively</h3>
+                    <p>Watch your balance grow. Withdraw anytime with instant settlement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="vaults-section" id="vaults">
+        <div class="section-header">
+            <div class="section-label">Investment Vaults</div>
+            <h2 class="section-title">Diversified strategies for every profile</h2>
+            <p class="section-description">Each vault is optimized for specific assets and risk levels, backed by audited smart contracts.</p>
+        </div>
+        
+        <div class="vaults-grid">
+            <div class="vault-card">
+                <div class="vault-header">
+                    <div class="vault-title">
+                        <div class="vault-icon">💵</div>
+                        <div class="vault-name">USDC Stable Yield</div>
+                    </div>
+                    <div class="vault-apy">
+                        <div class="apy-value">24.3%</div>
+                        <div class="apy-label">APY</div>
+                    </div>
+                </div>
+                <div class="vault-metrics">
+                    <div class="metric">
+                        <div class="metric-label">Total Value Locked</div>
+                        <div class="metric-value">$18.4M</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Depositors</div>
+                        <div class="metric-value">4,821</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Strategy</div>
+                        <div class="metric-value">Aave + Compound</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Network</div>
+                        <div class="metric-value">Arbitrum</div>
+                    </div>
+                </div>
+                <div class="vault-tags">
+                    <span class="tag low-risk">Low Risk</span>
+                    <span class="tag">Stablecoin</span>
+                </div>
+                <button class="deposit-btn">Deposit USDC</button>
+            </div>
+
+            <div class="vault-card">
+                <div class="vault-header">
+                    <div class="vault-title">
+                        <div class="vault-icon">💎</div>
+                        <div class="vault-name">ETH Optimized</div>
+                    </div>
+                    <div class="vault-apy">
+                        <div class="apy-value">31.7%</div>
+                        <div class="apy-label">APY</div>
+                    </div>
+                </div>
+                <div class="vault-metrics">
+                    <div class="metric">
+                        <div class="metric-label">Total Value Locked</div>
+                        <div class="metric-value">$22.1M</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Depositors</div>
+                        <div class="metric-value">3,294</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Strategy</div>
+                        <div class="metric-value">Lido + Curve</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Network</div>
+                        <div class="metric-value">Ethereum</div>
+                    </div>
+                </div>
+                <div class="vault-tags">
+                    <span class="tag medium-risk">Medium Risk</span>
+                    <span class="tag">ETH</span>
+                </div>
+                <button class="deposit-btn">Deposit ETH</button>
+            </div>
+
+            <div class="vault-card">
+                <div class="vault-header">
+                    <div class="vault-title">
+                        <div class="vault-icon">🏦</div>
+                        <div class="vault-name">DAI Maximum</div>
+                    </div>
+                    <div class="vault-apy">
+                        <div class="apy-value">26.9%</div>
+                        <div class="apy-label">APY</div>
+                    </div>
+                </div>
+                <div class="vault-metrics">
+                    <div class="metric">
+                        <div class="metric-label">Total Value Locked</div>
+                        <div class="metric-value">$6.9M</div>
+                    </div>
+                    <div class="metric">
